@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_popular_movie"
+        android:enabled="true"
+        android:title="@string/popular_movies"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_discover_movies"
+        android:enabled="true"
+        android:title="@string/discover_movies"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_upcoming_movies"
+        android:enabled="true"
+        android:title="@string/upcoming_movies"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_now_playing"
+        android:enabled="true"
+        android:title="@string/now_playing"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_top_rated"
+        android:enabled="true"
+        android:title="@string/top_rated"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_person"
+        android:enabled="true"
+        android:title="@string/person"
+        app:showAsAction="never" />
+</menu>
