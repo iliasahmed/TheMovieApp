@@ -19,7 +19,7 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
-class GenreAdapter(var genreList: List<GenreModel>, var context: Activity, val listener: OnGenreItemClickedListener<GenreModel>): RecyclerView.Adapter<GenreAdapter.GenreViewHolder>(){
+class GenreAdapter(var genreList: List<GenreModel>, var context: Activity, val listener: OnGenreItemClickedListener<GenreModel>, val selectedId: Int) : RecyclerView.Adapter<GenreAdapter.GenreViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GenreViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -32,15 +32,15 @@ class GenreAdapter(var genreList: List<GenreModel>, var context: Activity, val l
 
     override fun onBindViewHolder(holder: GenreViewHolder, position: Int) {
         val genre: GenreModel = genreList.get(position)
-        holder.bind(genre)
+        holder.bind(genre, selectedId)
     }
 
-    interface OnGenreItemClickedListener<GenreModel>{
+    interface OnGenreItemClickedListener<GenreModel> {
         fun onGenreItemClicked(genre: GenreModel)
     }
 
 
-    class GenreViewHolder(inflater: LayoutInflater, parent: ViewGroup, listener: OnGenreItemClickedListener<GenreModel>, genreList: List<GenreModel>): RecyclerView.ViewHolder(inflater.inflate(R.layout.genre_item_view, parent, false)){
+    class GenreViewHolder(inflater: LayoutInflater, parent: ViewGroup, listener: OnGenreItemClickedListener<GenreModel>, genreList: List<GenreModel>) : RecyclerView.ViewHolder(inflater.inflate(R.layout.genre_item_view, parent, false)) {
         private var tvName: TextView? = null
         private var checkBox: CheckBox? = null
 
@@ -59,8 +59,11 @@ class GenreAdapter(var genreList: List<GenreModel>, var context: Activity, val l
 
         }
 
-        fun bind(genre: GenreModel) {
+        fun bind(genre: GenreModel, selectedId: Int) {
             tvName?.text = genre.name
+            if (genre.id == selectedId) {
+                checkBox!!.isChecked = true
+            }
         }
 
 

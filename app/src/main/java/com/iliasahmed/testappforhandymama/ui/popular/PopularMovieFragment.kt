@@ -44,6 +44,7 @@ class PopularMovieFragment : GenreAdapter.OnGenreItemClickedListener<GenreModel>
     private var isGenreSelected = false
     private var searchQuery: String = ""
     private var genreId: Int = 0
+    private var selectedId: Int = 0
 
     var genreView: View? = null
     var alertDialog: AlertDialog? = null
@@ -84,7 +85,7 @@ class PopularMovieFragment : GenreAdapter.OnGenreItemClickedListener<GenreModel>
             var rvGenre: RecyclerView = genreView!!.findViewById(R.id.rvGenre)
             rvGenre.layoutManager = GridLayoutManager(context, 2) as RecyclerView.LayoutManager?
             rvGenre.addItemDecoration(RecyclerViewItemDecorator(2, 10, true))
-            var adapter: GenreAdapter = GenreAdapter(genreList, activity!!, this)
+            var adapter = GenreAdapter(genreList, activity!!, this, genreId)
             rvGenre.adapter = adapter
             alertDialog = builder.create()
             alertDialog!!.show()
@@ -182,6 +183,8 @@ class PopularMovieFragment : GenreAdapter.OnGenreItemClickedListener<GenreModel>
         alertDialog!!.dismiss()
         page = 1
         genreId = genre.id
+        isGenreSelected = true
+
         (popularMovieList as ArrayList).clear()
         callByGenre(page, genre.id)
     }
