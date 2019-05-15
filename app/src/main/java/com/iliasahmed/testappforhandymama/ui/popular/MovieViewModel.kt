@@ -184,4 +184,22 @@ class MovieViewModel(application: Application) : AndroidViewModel(application) {
         })
     }
 
+    fun fetchMovieByDiscoverFilter(page: Int, releaseYear: String, graterVote: String,lessVote: String,runTimeGrater: String, runtimeLess: String) {
+        isDataLoading = true
+        ApiHelper.fetchDiscoverMovieByFilter(page, releaseYear, graterVote, lessVote, runTimeGrater, runtimeLess, UrlUtils.API_KEY, object : DataFetchingListener<Response<JsonObject>> {
+            override fun onDataFetched(response: Response<JsonObject>) {
+                totalCount = Gson().fromJson(response.body()!!.get("total_results"), object : TypeToken<Int>() {}.type)
+                Logger.d(totalCount)
+                movieLiveData.value = Gson().fromJson<List<MovieModel>>(response.body()!!.get("results"), object : TypeToken<List<MovieModel>>() {}.type)
+                isDataLoading = false
+            }
+
+            override fun onFailed(status: Int) {
+                movieLiveData.value = ArrayList()
+                isDataLoading = false
+            }
+
+        })
+    }
+
 }

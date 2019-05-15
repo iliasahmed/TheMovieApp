@@ -45,8 +45,7 @@ dependencies {
 
     implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0-alpha04'
     implementation 'androidx.lifecycle:lifecycle-runtime:2.1.0-alpha04'
-    implementation 'com.orhanobut:logger:2.2.0'
-
+    implementation 'com.appyvet:materialrangebar:1.4.6'
     implementation 'com.orhanobut:logger:2.2.0'
 
     implementation 'com.github.f0ris.sweetalert:library:1.5.2'

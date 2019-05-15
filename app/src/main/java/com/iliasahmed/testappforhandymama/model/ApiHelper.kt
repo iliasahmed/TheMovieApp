@@ -157,6 +157,24 @@ public class ApiHelper {
             })
         }
 
+        fun fetchDiscoverMovieByFilter(page: Int, releaseYear: String, graterVote: String,lessVote: String,runTimeGrater: String, runtimeLess: String, api_key:String, dataFetchingListener: DataFetchingListener<Response<JsonObject>>) {
+            val iApiClient = ApiClient.getClient().create(IApiClient::class.java)
+            val call = iApiClient.filterDiscoverMovie(api_key, page, releaseYear.toInt(), 200, graterVote.toInt(), lessVote.toInt(), runTimeGrater.toInt(), runtimeLess.toInt())
+            call.enqueue(object : Callback<JsonObject> {
+                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                    if (response.code() == 200){
+                        dataFetchingListener.onDataFetched(response)
+                    }else{
+                        dataFetchingListener.onFailed(response.code())
+                    }
+                }
+
+                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                    dataFetchingListener.onFailed(0)
+                }
+            })
+        }
+
         fun fetchPersonList(page: Int, api_key:String, dataFetchingListener: DataFetchingListener<Response<JsonObject>>) {
             val iApiClient = ApiClient.getClient().create(IApiClient::class.java)
             val call = iApiClient.personList(api_key, page)

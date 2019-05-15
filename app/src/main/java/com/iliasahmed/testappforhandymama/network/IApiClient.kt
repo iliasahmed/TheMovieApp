@@ -35,5 +35,15 @@ interface IApiClient {
     @GET(UrlUtils.BASE_URL+"genre/{id}/movies")
     abstract fun filterByGenre(@Path("id") id: Int, @Query("api_key") api_key: String, @Query("page") page: Int): Call<JsonObject>
 
+    @GET(UrlUtils.DISCOVER_MOVIE_LIST)
+    abstract fun filterDiscoverMovie(@Query("api_key") api_key: String,
+                                     @Query("page") page: Int,
+                                     @Query("primary_release_year") releaseYear: Int,
+                                     @Query("vote_count.gte") voteCount: Int,
+                                     @Query("vote_average.lte") lessVote: Int,
+                                     @Query("vote_average.gte") graterVote: Int,
+                                     @Query("with_runtime.lte") runtimeLess: Int,
+                                     @Query("with_runtime.gte") runTimeGrater: Int): Call<JsonObject>
+
 
 }
